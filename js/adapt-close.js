@@ -44,7 +44,9 @@ define([ "coreJS/adapt" ], function(Adapt) {
 			var config = Adapt.course.get("_close");
 			config.browserPromptIfIncomplete = config.browserPromptIfComplete = false;
 
-			top.window.close();
+			if (window.parent == window) {
+			    top.self.close();
+			}
 		}
 
 	});
