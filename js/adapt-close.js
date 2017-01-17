@@ -1,4 +1,6 @@
-define([ "coreJS/adapt" ], function(Adapt) {
+define([ "coreJS/adapt",
+  "extensions/adapt-contrib-spoor/js/scorm"
+   ], function(Adapt, scorm) {
 
 	var CloseView = Backbone.View.extend({
 
@@ -44,6 +46,10 @@ define([ "coreJS/adapt" ], function(Adapt) {
 			var config = Adapt.course.get("_close");
 			config.browserPromptIfIncomplete = config.browserPromptIfComplete = false;
 
+			if (scorm){
+				scorm.finish();
+			}
+			
 			if (window.parent == window) {
 			    top.self.close();
 			}
