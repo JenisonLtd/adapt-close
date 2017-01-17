@@ -13,9 +13,10 @@ define([ "coreJS/adapt",
 
 		render: function() {
 			var data = this.model.toJSON();
+			data._globals = Adapt.course.get("_globals");
+			
 			var template = Handlebars.templates.close;
 
-			data._globals = Adapt.course.get("_globals");
 			this.setElement(template(data)).$el.prependTo($(".navigation-inner"));
 		},
 
@@ -66,7 +67,7 @@ define([ "coreJS/adapt",
 	Adapt.once("adapt:initialize", function() {
 		var config = Adapt.course.get("_close");
 
-		if (!config) return;
+		if (!config || !config._isEnabled) return;
 
 		var button = config._button;
 
